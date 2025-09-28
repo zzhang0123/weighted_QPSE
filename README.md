@@ -15,6 +15,8 @@ This package implements quadratic estimator methodology for extracting cosmologi
 - Covariance matrix calculation
 - Four-panel comparison plots (mixing )
 
+**Notations**: See [notations.pdf](notations.pdf).
+
 
 
 ## Key Features
