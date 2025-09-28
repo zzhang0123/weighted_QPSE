@@ -20,7 +20,7 @@ class simple_pspec:
         self.w2 = nsample2
         self.freqs = freqs  
         df = np.median(np.diff(self.freqs))
-        self.delays = np.fft.fftshift(np.fft.fftfreq(self.spw_Ndlys, d=df)) #in sec
+        self.delays = np.fft.fftshift(np.fft.fftfreq(self.spw_Ndlys, d=df)) # Delay coordinates, in sec
         
         self.taper = taper
         self.Q_alt = {}
@@ -43,8 +43,14 @@ class simple_pspec:
                 raise ValueError("Invalid beam function")
             
             self.omega_p = beam_omega.real
+            print("Using beam with omega_p = ", self.omega_p)
+            print("Using beam with norm = ", np.sum(_beam**2, axis=-1).real)
+
+
             self.omega_pp = np.sum(_beam**2, axis=-1).real*np.pi/(3.*N*N)
+
             _beam = _beam/self.omega_p[:, None]
+            print("Using beam with omega_pp = ", self.omega_pp)
             
             self.qnorm_exact = np.pi/(3.*N*N) * np.dot(_beam, _beam.T)
             self.qnorm_exact *= np.median(np.diff(self.delays))
